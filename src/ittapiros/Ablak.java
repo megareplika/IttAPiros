@@ -27,10 +27,13 @@ public class Ablak extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ValasztoGroup = new javax.swing.ButtonGroup();
         btPohar1 = new javax.swing.JButton();
         btPohar2 = new javax.swing.JButton();
         btPohar3 = new javax.swing.JButton();
         lbVisszajelzes = new javax.swing.JLabel();
+        rbUjhely = new javax.swing.JRadioButton();
+        rbMarad = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         meFile = new javax.swing.JMenu();
         meMent = new javax.swing.JMenuItem();
@@ -50,6 +53,12 @@ public class Ablak extends javax.swing.JFrame {
 
         lbVisszajelzes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lbVisszajelzes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        ValasztoGroup.add(rbUjhely);
+        rbUjhely.setText("Új helyre");
+
+        ValasztoGroup.add(rbMarad);
+        rbMarad.setText("Maradjon");
 
         meFile.setText("Fájl");
 
@@ -81,30 +90,39 @@ public class Ablak extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
                         .addComponent(btPohar1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btPohar2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(btPohar3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(rbUjhely)
+                        .addGap(57, 57, 57)
+                        .addComponent(rbMarad)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbUjhely)
+                    .addComponent(rbMarad))
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btPohar2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPohar1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPohar3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -146,6 +164,7 @@ public class Ablak extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup ValasztoGroup;
     private javax.swing.JButton btPohar1;
     private javax.swing.JButton btPohar2;
     private javax.swing.JButton btPohar3;
@@ -158,5 +177,7 @@ public class Ablak extends javax.swing.JFrame {
     private javax.swing.JMenuItem meMent;
     private javax.swing.JMenuItem meNegyPohar;
     private javax.swing.JMenuItem neUjjatek;
+    private javax.swing.JRadioButton rbMarad;
+    private javax.swing.JRadioButton rbUjhely;
     // End of variables declaration//GEN-END:variables
 }
