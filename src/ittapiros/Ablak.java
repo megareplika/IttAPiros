@@ -5,17 +5,72 @@
  */
 package ittapiros;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Kenaros
  */
 public class Ablak extends javax.swing.JFrame {
 
+    boolean[] hol = new boolean[3];
+    final int felso = 2, also = 0;
+
     /**
      * Creates new form Ablak
      */
     public Ablak() {
         initComponents();
+        elhelyez();
+    }
+
+    private void elhelyez() {
+        int hova = (int) (Math.random() * felso - also + 1) + also;
+        for (int i = 0; i < hol.length; i++) {
+            hol[i] = false;
+        }
+        for (boolean b : hol) {
+            System.out.println(b);
+        }
+        for (int i = 0; i < 10; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+        switch (hova) {
+            case 0:
+                hol[0] = true;
+                break;
+            case 1:
+                hol[1] = true;
+                break;
+            case 2:
+                hol[2] = true;
+                break;
+        }
+        for (boolean b : hol) {
+            System.out.println(b);
+        }
+        for (int i = 0; i < 10; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+    }
+
+    private void talaltE(boolean igaz) {
+        if (igaz) {
+            lbVisszajelzes.setText("Talált");
+            elhelyez();
+        } else {
+            lbVisszajelzes.setText("Nem talált");
+            if (rbUjhely.isSelected()) {
+                elhelyez();
+            }
+        }
     }
 
     /**
@@ -44,12 +99,28 @@ public class Ablak extends javax.swing.JFrame {
         meNegyPohar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Itt a poros Hol a Piros?");
 
         btPohar1.setText("Pohár");
+        btPohar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPohar1ActionPerformed(evt);
+            }
+        });
 
         btPohar2.setText("Pohár");
+        btPohar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPohar2ActionPerformed(evt);
+            }
+        });
 
         btPohar3.setText("Pohár");
+        btPohar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPohar3ActionPerformed(evt);
+            }
+        });
 
         lbVisszajelzes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lbVisszajelzes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -58,6 +129,7 @@ public class Ablak extends javax.swing.JFrame {
         rbUjhely.setText("Új helyre");
 
         ValasztoGroup.add(rbMarad);
+        rbMarad.setSelected(true);
         rbMarad.setText("Maradjon");
 
         meFile.setText("Fájl");
@@ -73,12 +145,22 @@ public class Ablak extends javax.swing.JFrame {
         meJatek.setText("Játék");
 
         neUjjatek.setText("Új Játék");
+        neUjjatek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                neUjjatekActionPerformed(evt);
+            }
+        });
         meJatek.add(neUjjatek);
 
         meHaromPohar.setText("3 pohár");
         meJatek.add(meHaromPohar);
 
         meNegyPohar.setText("4 pohár");
+        meNegyPohar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meNegyPoharActionPerformed(evt);
+            }
+        });
         meJatek.add(meNegyPohar);
 
         jMenuBar1.add(meJatek);
@@ -126,42 +208,76 @@ public class Ablak extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void meNegyPoharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meNegyPoharActionPerformed
+        JDialog dialogAblak = new JDialog();
+        dialogAblak.setLayout(new GridLayout(2, 1));
+        dialogAblak.add(new JLabel("Ez a mód jelenleg nem elérhető!"));
+        JButton btOk = new JButton("OK");
+        btOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                dialogAblak.setVisible(!dialogAblak.isVisible());
+            }
+        });
+        dialogAblak.add(btOk);
+        dialogAblak.setLocationRelativeTo(this);
+        dialogAblak.setVisible(true);
+    }//GEN-LAST:event_meNegyPoharActionPerformed
+
+    private void btPohar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPohar1ActionPerformed
+        talaltE(hol[0]);
+    }//GEN-LAST:event_btPohar1ActionPerformed
+
+    private void btPohar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPohar2ActionPerformed
+        talaltE(hol[1]);
+    }//GEN-LAST:event_btPohar2ActionPerformed
+
+    private void btPohar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPohar3ActionPerformed
+        talaltE(hol[2]);
+    }//GEN-LAST:event_btPohar3ActionPerformed
+
+    private void neUjjatekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_neUjjatekActionPerformed
+        rbMarad.setSelected(true);
+        elhelyez();
+    }//GEN-LAST:event_neUjjatekActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ablak().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Ablak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Ablak().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup ValasztoGroup;
