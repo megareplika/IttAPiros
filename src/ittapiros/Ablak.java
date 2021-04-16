@@ -24,8 +24,9 @@ import javax.swing.JLabel;
  */
 public class Ablak extends javax.swing.JFrame {
 
-    boolean[] hol = new boolean[3];
-    final int felso = 2, also = 0;
+    private boolean[] hol = new boolean[3];
+    private final int felso = 2, also = 0;
+    private File fTxt = new File("./config.txt");
 
     /**
      * Creates new form Ablak
@@ -270,11 +271,10 @@ public class Ablak extends javax.swing.JFrame {
         int golyohely = i;
         String szov = "Golyohely:" + golyohely + ";" + "Találat:" + lbVisszajelzes.getText() + ";" + rbMarad.getText() + ":" + rbMarad.isSelected() + ";" + rbUjhely.getText() + ":" + rbUjhely.isSelected();
         try {
-            File f = new File("./config.txt");
-            if (f.exists()) {
-                Files.write(Paths.get(f.getPath()), szov.getBytes(), StandardOpenOption.APPEND);
+            if (fTxt.exists()) {
+                Files.write(Paths.get(fTxt.getPath()), szov.getBytes(), StandardOpenOption.APPEND);
             } else {
-                Files.write(Paths.get(f.getPath()), szov.getBytes());
+                Files.write(Paths.get(fTxt.getPath()), szov.getBytes());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -283,8 +283,7 @@ public class Ablak extends javax.swing.JFrame {
 
     private void meBetoltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meBetoltActionPerformed
         try {
-            File f = new File("./config.txt");
-            List<String> lista = Files.readAllLines(Paths.get(f.getPath()));
+            List<String> lista = Files.readAllLines(Paths.get(fTxt.getPath()));
             String utolsoSor = lista.get(lista.size() - 1);
             String[] s = utolsoSor.split(";");
             int hely = Integer.parseInt(s[0].split(":")[1]);
