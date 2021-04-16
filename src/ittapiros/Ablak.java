@@ -5,6 +5,7 @@
  */
 package ittapiros;
 
+import com.sun.imageio.plugins.common.SubImageInputStream;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,8 +60,14 @@ public class Ablak extends javax.swing.JFrame {
                 hol[2] = true;
                 break;
         }
-        for (boolean b : hol) {
-            System.out.println(b);
+        int hely = 0;
+        for (int i = 0; i < hol.length; i++) {
+            if (hol[i]) {
+                hely = i;
+            }
+        }
+        if (new File("./tipp.deb").exists()) {
+            this.setTitle("A gogyó a "+hely+1+". pohár alat van");
         }
         for (int i = 0; i < 10; i++) {
             System.out.print("-");
