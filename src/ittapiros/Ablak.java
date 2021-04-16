@@ -8,6 +8,12 @@ package ittapiros;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -135,9 +141,19 @@ public class Ablak extends javax.swing.JFrame {
         meFile.setText("Fájl");
 
         meMent.setText("Mentes");
+        meMent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meMentActionPerformed(evt);
+            }
+        });
         meFile.add(meMent);
 
         meBetolt.setText("Betöltés");
+        meBetolt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meBetoltActionPerformed(evt);
+            }
+        });
         meFile.add(meBetolt);
 
         jMenuBar1.add(meFile);
@@ -172,23 +188,25 @@ public class Ablak extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btPohar1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(btPohar2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(btPohar3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(96, 96, 96)
                         .addComponent(rbUjhely)
                         .addGap(57, 57, 57)
-                        .addComponent(rbMarad)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addComponent(rbMarad))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btPohar1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(btPohar2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(btPohar3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,14 +215,14 @@ public class Ablak extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbUjhely)
                     .addComponent(rbMarad))
-                .addGap(62, 62, 62)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btPohar2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPohar1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btPohar3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lbVisszajelzes, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,6 +261,43 @@ public class Ablak extends javax.swing.JFrame {
         rbMarad.setSelected(true);
         elhelyez();
     }//GEN-LAST:event_neUjjatekActionPerformed
+
+    private void meMentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meMentActionPerformed
+        int i = 0, N = hol.length;
+        while (i < N && !hol[i]) {
+            i++;
+        }
+        int golyohely = i;
+        String szov = "Golyohely:" + golyohely + ";" + "Találat:" + lbVisszajelzes.getText() + ";" + rbMarad.getText() + ":" + rbMarad.isSelected() + ";" + rbUjhely.getText() + ":" + rbUjhely.isSelected();
+        try {
+            File f = new File("./config.txt");
+            if (f.exists()) {
+                Files.write(Paths.get(f.getPath()), szov.getBytes(), StandardOpenOption.APPEND);
+            } else {
+                Files.write(Paths.get(f.getPath()), szov.getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_meMentActionPerformed
+
+    private void meBetoltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meBetoltActionPerformed
+        try {
+            File f = new File("./config.txt");
+            List<String> lista = Files.readAllLines(Paths.get(f.getPath()));
+            String utolsoSor = lista.get(lista.size() - 1);
+            String[] s = utolsoSor.split(";");
+            int hely = Integer.parseInt(s[0].split(":")[1]);
+            lbVisszajelzes.setText(s[1].split(":")[1]);
+            if (s[2].split(":")[1].equals("true") && s[2].split(":")[0].equals(rbMarad.getText())) {
+                rbMarad.setSelected(true);
+            } else if (s[2].split(":")[1].equals("true") && s[2].split(":")[0].equals(rbUjhely.getText())) {
+                rbUjhely.setSelected(true);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_meBetoltActionPerformed
 
     /**
      * @param args the command line arguments
